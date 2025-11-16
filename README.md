@@ -77,7 +77,7 @@ php artisan serve
 
 7. Edit Profile
 <p align="center">
-  <img src="public/picture_apps/edit_profile.png" alt="Dashboard" width="600">
+  <img src="public/picture_apps/edit_profile_views.png" alt="Dashboard" width="600">
 </p>
 
 ## Demo Aplikasi
