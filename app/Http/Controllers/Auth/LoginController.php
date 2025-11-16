@@ -115,7 +115,9 @@ class LoginController extends Controller
 
     public function checkToken(){
         return response()->json([
-            'valid' => true
+            'valid' => true,
+            'name_user' => auth('api')->user()->name ?? '-',
+            'username'  => auth('api')->user()->username ?? '-'
         ]);
     }
 

@@ -35,7 +35,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Detail Appointment</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -53,7 +53,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary closeDetail" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary closeDetail" >Close</button>
                         </div>
                     </div>
                 </div>
@@ -83,12 +83,17 @@
 
             })
 
-            $(document).on('click', '.closeDetail', function () {
+           $(document).on('click', '.closeDetail', function () {
                 const modalsTag = document.getElementById('modal-appointment');
-                const modal = new bootstrap.Modal(modalsTag);
+                const modal = bootstrap.Modal.getInstance(modalsTag);
                 modal.hide();
             });
 
+             $(document).on('click','.close',function(){
+                const modalsTag = document.getElementById('modal-appointment');
+                const modal = bootstrap.Modal.getInstance(modalsTag);
+                modal.hide();
+            })
 
         })
 

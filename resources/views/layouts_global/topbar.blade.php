@@ -84,11 +84,6 @@
 
 
 <script>
-
-    $(document).ready(function(){
-        myProfile();
-    })
-
     function logoutProcess(){
         let token = localStorage.getItem('token');
         console.log('token : ',token);
@@ -118,34 +113,5 @@
     }
 
 
-    function myProfile(){
-            let token = localStorage.getItem('token');
-            if(!token){
-                window.location.href = '/login';
-                return;
-            }
-
-            const urls = `{{ url('api/profile/get') }}`;
-            $.ajax({
-                url           :urls,
-                method        : "GET",
-                dataType      : "JSON",
-                headers       : {
-                    "Authorization" : "Bearer " + token
-                },
-                success :function(response){
-                    if(response.status == 200){
-                        $('.nameUser').text(response.data.name);
-                    }
-                },
-                error : function(xhr){
-                    if (xhr.status == 401) {
-                        localStorage.removeItem('token');
-                        window.location.href = '/login';
-                    }
-                }
-            })
-
-        }
 
 </script>

@@ -41,6 +41,8 @@ class Profile extends Model{
 
     }
 
+  
+
     static function getProfile()
     {
 

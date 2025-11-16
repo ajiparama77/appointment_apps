@@ -64,7 +64,7 @@
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary closeDetail" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary closeDetail">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -78,6 +78,7 @@
 @section('script')
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
     <script>
+        let outputLocation = null;
         let uuidSelected = null;
         let itemsDetail = [];
         $(document).ready(function(){
@@ -97,9 +98,15 @@
 
             $(document).on('click', '.closeDetail', function () {
                 const modalsTag = document.getElementById('modal-appointment');
-                const modal = new bootstrap.Modal(modalsTag);
+                const modal = bootstrap.Modal.getInstance(modalsTag);
                 modal.hide();
             });
+
+            $(document).on('click','.close',function(){
+                const modalsTag = document.getElementById('modal-appointment');
+                const modal = bootstrap.Modal.getInstance(modalsTag);
+                modal.hide();
+            })
 
         })
 
@@ -120,7 +127,8 @@
                 },
                 success :function(response){
                     if(response.status == 200){
-                        $('#val_timezone').text(response.data.preffered_timezone);
+                        outputLocation = response.data.preffered_timezone;
+                        $('#val_timezone').text(outputLocation);
                     }
                 },
                 error : function(xhr){

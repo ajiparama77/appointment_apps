@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="shortcut icon" href="{{ URL::asset('images/coding.png') }}">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"></script>
-	<script src="https://unpkg.com/leaflet.maskcanvas@0.3.1"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     @include('layouts_global.head-css')
@@ -66,6 +66,7 @@
             },
             success :function(response){
                 console.log(response)
+                 $('.nameUser').text(response.name_user);
             },
             error :function(xhr){
                 if(xhr.status == 401){
@@ -76,6 +77,9 @@
         })
 
     }
+
+    
+   
 
 </script>
 
