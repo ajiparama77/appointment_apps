@@ -44,6 +44,42 @@ php artisan serve
 
 ```
 
+## Tampilan Aplikasi
+1. Register
+<p align="center">
+  <img src="public/picture_apps/register.png" alt="Dashboard" width="600">
+</p>
+
+2. Login
+<p align="center">
+  <img src="public/picture_apps/login_view.png" alt="Dashboard" width="600">
+</p>
+
+3. Home / Upcoming appointment
+<p align="center">
+  <img src="public/picture_apps/upcoming_views.png" alt="Dashboard" width="600">
+</p>
+
+4. List Appointment
+<p align="center">
+  <img src="public/picture_apps/list_appointment.png" alt="Dashboard" width="600">
+</p>
+
+5. Create Appointment
+<p align="center">
+  <img src="public/picture_apps/create_appointment.png" alt="Dashboard" width="600">
+</p>
+
+6. List Profile
+<p align="center">
+  <img src="public/picture_apps/list_users.png" alt="Dashboard" width="600">
+</p>
+
+7. Edit Profile
+<p align="center">
+  <img src="public/picture_apps/edit_profile.png" alt="Dashboard" width="600">
+</p>
+
 ## Demo Aplikasi
 1. Fitur Registrasi & Autentikasi
 [![Watch the video](public/demo_video/register_auth.mp4)](public/demo_video/register_auth.mp4)
