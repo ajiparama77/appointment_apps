@@ -46,21 +46,20 @@ php artisan serve
 
 ## Demo Aplikasi
 1. Fitur Registrasi & Autentikasi
-<video src="public/demo_video/register_auth.mp4" controls width="600">
-  Registrasi & Auth
-</video>
+[![Watch the video](public/demo_video/register_auth.mp4)](public/demo_video/register_auth.mp4)
+
+
 
 2. Fitur Daftar User & Edit Profile
-<video src="public/demo_video/profiles_editprofile.mp4" controls width="600">
-  List profile & edit profile
-</video>
+[![Watch the video](public/demo_video/profiles_editprofile.mp4)](public/demo_video/profiles_editprofile.mp4)
+
+
 
 3. List Appointment & Create Appointment (Invite from timezone Indonesia)
-    <video src="public/demo_video/create_appointment_indonesia.mp4" controls width="600">
-        Appointment & Create Appointment (Indonesia)
-    </video>
+[![Watch the video](public/demo_video/create_appointment_indonesia.mp4)](public/demo_video/create_appointment_indonesia.mp4)
+
+
 
 4. List Appointment & Create Appointment (Invite from timezone Auckland)
-    <video src="public/demo_video/create_appointment_auckland.mp4" controls width="600">
-        Appointment & Create Appointment (Auckland)
-    </video>
+[![Watch the video](public/demo_video/create_appointment_auckland.mp4)](public/demo_video/create_appointment_auckland.mp4)
+
