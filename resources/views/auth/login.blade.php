@@ -74,6 +74,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
 $(document).ready(function(){
@@ -99,6 +100,14 @@ function loginProcess(){
             if(response.meta.status == 200){
                 localStorage.setItem('token',response.data.access_token)
                 location.replace(`{{ route('dashboard') }}`)
+            }
+
+            if(response.meta.status == 401){
+                Swal.fire({
+                    icon : 'Warning',
+                    title : 'Failed',
+                    text : 'Login failed, username not registered'
+                })
             }
         }
 

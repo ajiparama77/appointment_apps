@@ -88,9 +88,12 @@ class LoginController extends Controller
             }
 
             return response()->json([
-                'success' => false,
-                'message' => 'Unauthorized (email/password salah)'
-            ], 401);
+                'meta' => [
+                    'status'   => 401,
+                    'message'  => 'Unauthorized (email/password salah)'
+                ],
+               
+            ]);
 
 
         }catch(\Exception $ec){

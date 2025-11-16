@@ -124,9 +124,10 @@ static function getMyAppointment()
         ->first();
 
     if ($response) {
-        // anggap di DB sudah UTC
-        $startUtc = Carbon::parse($response->start)->setTimezone('UTC');
-        $endUtc   = Carbon::parse($response->end)->setTimezone('UTC');
+    
+        $startUtc = Carbon::parse($response->start, 'UTC');
+        $endUtc   = Carbon::parse($response->end, 'UTC');
+
 
         $users = DB::table('detail_appointment')
             ->where('appointment_id', $uuid)
@@ -137,9 +138,8 @@ static function getMyAppointment()
         foreach ($users as $index) {
             $userTz = $index->preffered_timezone;
 
-          
-            $startLocal = (clone $startUtc)->setTimezone($userTz);
-            $endLocal   = (clone $endUtc)->setTimezone($userTz);
+            $startLocal = $startUtc->copy()->setTimezone($userTz);
+            $endLocal   = $endUtc->copy()->setTimezone($userTz);
 
            
             $startHour = (int) $startLocal->format('H');
@@ -150,8 +150,8 @@ static function getMyAppointment()
                 'user_uuid'  => $index->uuid,
                 'name'       => $index->name,
                 'timezone'   => $userTz,
-                'start_utc'  => $startUtc->toIso8601String(),   
-                'end_utc'    => $endUtc->toIso8601String(),
+                'start_utc'  => $startUtc,   
+                'end_utc'    => $endUtc,
                 'start'      => $startLocal->format('Y-m-d H:i:s'), 
                 'end'        => $endLocal->format('Y-m-d H:i:s'),
                 'within_09_17' => $isWithinWorkingHours,
@@ -161,8 +161,6 @@ static function getMyAppointment()
 
     return $output;
 }
-
-
 
     static function getMyUpcoming(){
         $response = [];
@@ -189,17 +187,8 @@ static function getMyAppointment()
 
     try {
         //Get waktu user location
-        $timezone = null;
-        $timezoneUsers = User::where('uuid',auth('api')->user()->uuid)
-            ->select('preffered_timezone AS timezone')
-            ->first();
-
-        if(!empty($timezoneUsers)){
-            $timezone = $timezoneUsers->timezone;
-        }
-
-        date_default_timezone_set($timezone);
-
+        $creatorTz = auth('api')->user()->preffered_timezone;
+       
         $convertUtc = validate_timezone($param);
         if($convertUtc['status'] == false ){
             return response()->json([
@@ -211,13 +200,17 @@ static function getMyAppointment()
         $uuid = Uuid::uuid4()->toString();
         $invitesUser = $param->invites;
 
+        $startUtc = Carbon::createFromFormat('Y-m-d H:i',$param->start,$creatorTz)->setTimezone('UTC');
+        $endUtc   = Carbon::createFromFormat('Y-m-d H:i',$param->end,$creatorTz)->setTimezone('UTC');
+
+       
         $exec = Appointment::create([
             'uuid' => $uuid,
             'title' => $param->title,
-            'start' => $param->start,
-            'end' => $param->end,
+            'start' => $startUtc->format('Y-m-d H:i:s'),
+            'end'   => $endUtc->format('Y-m-d H:i:s'),
             'creator_id' => auth('api')->user()->uuid,
-            'timezone_location' => $timezone
+            'timezone_location' => $creatorTz
         ]);
 
         if (!empty($invitesUser)) {
@@ -227,8 +220,8 @@ static function getMyAppointment()
                     ->select('invite_to')
                     ->where('invite_to',$user)
                     ->join('appointment','appointment.uuid','=','detail_appointment.appointment_id')
-                    ->whereBetween('appointment.start',[$param->start,$param->end])
-                    ->whereBetween('appointment.end',[$param->start,$param->end])
+                    ->whereBetween('appointment.start',[$startUtc->format('Y-m-d H:i:s'),$endUtc->format('Y-m-d H:i:s')])
+                    ->whereBetween('appointment.end',[$startUtc->format('Y-m-d H:i:s'),$endUtc->format('Y-m-d H:i:s')])
                     ->first();
 
                 if(!empty($checkUsers)){
