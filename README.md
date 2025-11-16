@@ -25,7 +25,7 @@ dengan antar timezone Asia/Jakarta & Pacific/Auckland.
 ## Setup Database (PostgreSQL)
 1. Buat database baru di PostgreSQL, contoh: `appointment_apps`.
 2. Import SQL pada file `appointment_apps_db` 
-3. Konfigurasikan pada .env yang dikirimkan
+3. Konfigurasikan pada .env anda
 
 DB_CONNECTION=pgsql
 DB_HOST=localhost
